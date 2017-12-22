@@ -9,6 +9,7 @@ package side.project.pkg1;
  *
  * @author Mark
  */
+import side.project.pkg1.GUI;
 public class Main {
 
     /**
@@ -16,6 +17,7 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+    GUI g = new GUI();
     }
     
 }
