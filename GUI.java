@@ -10,10 +10,16 @@ package side.project.pkg1;
  * @author Mark
  */
 import java.awt.BorderLayout;
-import java.awt.Frame;
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.Button;
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import java.awt.Button;
-import javax.swing.*;
+import javax.swing.JPanel;
 
 public class GUI {
     //GUI gang GUI gang GUI gang.
@@ -21,10 +27,12 @@ public class GUI {
     JFrame jf = new JFrame();
     jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     jf.setTitle("Show Generator");
+    
     JPanel jp = new JPanel();
     JButton enter = new JButton("Enter");
     jf.add(enter, BorderLayout.SOUTH);
     jf.setVisible(true);
+    
     
     
     
