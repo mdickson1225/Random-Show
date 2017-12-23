@@ -85,7 +85,10 @@ public class stageGUI extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        launch(args);
+        Get_data gd = new Get_data();
+    	launch(args);
+    	gd.getTricks(TrickType.COIN,1);
+                
     }
 
 }

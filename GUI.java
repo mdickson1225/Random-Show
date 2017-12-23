@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package side.project.pkg1;
+//package side.project.pkg1;
 
 /**
  *
@@ -31,10 +31,6 @@ public class GUI {
     JPanel jp = new JPanel();
     JButton enter = new JButton("Enter");
     jf.add(enter, BorderLayout.SOUTH);
-    jf.setVisible(true);
-    
-    
-    
-    
+    jf.setVisible(true); 
 }
 }

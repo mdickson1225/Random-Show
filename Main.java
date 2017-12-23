@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package side.project.pkg1;
+//package side.project.pkg1;
 
 /**
- *
  * @author Mark
+ * 
  */
-import side.project.pkg1.GUI;
+
+
 public class Main {
 
     /**
