@@ -8,6 +8,7 @@ import java.net.*;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.*;
+import org.jsoup.select.*;
 
 import java.io.*;
 
@@ -46,7 +47,7 @@ public class Get_data {
 			String str;
 			while((str = in.readLine()) != null) {
 				str = in.readLine().toString();
-				System.out.println(str);
+				//System.out.println(str);
 				pageHTML += str; //Build up the html
 			}
 			in.close();
@@ -59,11 +60,18 @@ public class Get_data {
 		///JSoup parsing
 			
 		Document doc = Jsoup.parse(pageHTML);
+			
+		Elements items = doc.select("div[class*=name]");
+		/* 
+		while(items.first() != null) {
+			System.out.print(items.first().toString());
+			items = items.next();
+		} */
 		
+		System.out.println(items.toString());
 		
-		
-		
-		
+		System.out.print("Finished");
+				
 	    return res;
 
 	}
