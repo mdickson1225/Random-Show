@@ -85,20 +85,29 @@ public class stageGUI extends Application {
             	int rope_no = 0;
             	int card_no = 0;
                 String cardString = cardField.getText();
-                card_no = Integer.parseInt(cardString);
-                gd.getTricks(TrickType.CARD, card_no);
-                gd.storeData("show.txt");
+                System.out.println(cardString.isEmpty());
+                if(!cardString.isEmpty()) {
+                	card_no = Integer.parseInt(cardString);
+                	gd.getTricks(TrickType.CARD, card_no);
+                }
+                
                 String coinString = coinField.getText();
-                coin_no = Integer.parseInt(coinString);
-                gd.getTricks(TrickType.COIN, coin_no);
-                gd.storeData("show.txt");
+                if(!coinString.isEmpty()) {
+                	coin_no = Integer.parseInt(coinString);
+                	gd.getTricks(TrickType.COIN, coin_no);
+            	}
+                
                 String ropeString = ropeField.getText();
-                rope_no = Integer.parseInt(ropeString);
-                gd.getTricks(TrickType.ROPE, rope_no);
-                gd.storeData("show.txt");
+                if(!ropeString.isEmpty()) {
+                	rope_no = Integer.parseInt(ropeString);
+                	gd.getTricks(TrickType.ROPE, rope_no);
+                }
+                
                 String silkString = silkField.getText();
-                silk_no = Integer.parseInt(silkString);
-                gd.getTricks(TrickType.SILK, silk_no);
+                if(!silkString.isEmpty()) {
+                	silk_no = Integer.parseInt(silkString);
+                	gd.getTricks(TrickType.SILK, silk_no);
+                }
                 gd.storeData("show.txt");
                 System.out.println("You just created a show");
             }
@@ -110,11 +119,11 @@ public class stageGUI extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Get_data gd = new Get_data();
+        //Get_data gd = new Get_data();
     	launch(args);
-    	gd.getTricks(TrickType.ROPE,2);
-        gd.getTricks(TrickType.CARD, 2);
-    	gd.storeData("show.txt");
+    	//gd.getTricks(TrickType.ROPE,2);
+        //gd.getTricks(TrickType.CARD, 2);
+    	//gd.storeData("show.txt");
     	/*int n = res.length;
     	for(int i = 0; i < n; i++) {
     		System.out.printf("Trick number %d\n",i);

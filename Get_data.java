@@ -84,7 +84,7 @@ public class Get_data {
 		
 		
 		int urlStart = sndEq + 2;
-		int urlEnd = nameStart - 2;
+		int urlEnd = nameStart - 4;
 		
 		
 		lst[0] = html.substring(nameStart, nameEnd);
