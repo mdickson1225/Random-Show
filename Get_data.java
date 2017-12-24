@@ -18,13 +18,15 @@ import java.io.*;
 public class Get_data {
     
     //Urls to webpages of lists of each type of trick
-    String stage_url;
+    String base_url;
+	String stage_url;
     String coin_url;
     String silk_url;
     String card_url;
 
     /* Blank constructor */
 	public Get_data(){
+		base_url = "https://www.magictricks.com/";
 		stage_url = "https://www.magictricks.com/stage-magic.html";
 		coin_url = "https://www.magictricks.com/coin-magic-tricks.html";
 		silk_url = "";
@@ -41,15 +43,20 @@ public class Get_data {
 	private String[] getInfo(String html) {
 		String[] lst = new String[2];
 	
-		String nameHtml = Jsoup.parse(html).select("a[href]").toString();
-		int start = nameHtml.indexOf('>') + 1;
-		int end = nameHtml.indexOf('<',start);
+		String subHtml = Jsoup.parse(html).select("a[href]").toString();
+		int nameStart = subHtml.indexOf('>') + 1;
+		int nameEnd = subHtml.indexOf('<', nameStart);
+		int urlStart = subHtml.indexOf('=') + 2;
+		int urlEnd = nameStart - 2;
 		
-		String name = nameHtml.substring(start,end);
 		
-		System.out.printf("Entered html parse with html:\n%s\n",html);
+		lst[0] = subHtml.substring(nameStart, nameEnd);
+		lst[1] = base_url + subHtml.substring(urlStart, urlEnd);
+		
+		//System.out.printf("Entered html parse with html:\n%s\n",html);
 	
-		System.out.printf("Parsed trick name: %s\n", name);
+		System.out.printf("Parsed trick name: %s\n", lst[0]);
+		System.out.printf("Parsed trick url: %s\n", lst[1]);
 		
 		return lst;
 	}
