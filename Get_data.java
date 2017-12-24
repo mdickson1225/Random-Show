@@ -24,6 +24,14 @@ public class Get_data {
     String silk_url;
     String card_url;
 
+    //Arrays to store data from last call of "gettricks" 
+    //for conventient file storage
+    
+    String[][] rope_data;
+    String[][] coin_data;
+    String[][] silk_data;
+    String[][] card_data;
+    
     /* Blank constructor */
 	public Get_data(){
 		base_url = "https://fabmagic.com";
@@ -37,6 +45,27 @@ public class Get_data {
 		return (type == TrickType.CARD) ? card_url : (type == TrickType.COIN) ? coin_url : (type == TrickType.SILK) ? silk_url : rope_url;
 	}
 
+	
+	//Given data and a type update the class variable storing the
+	//Most recent data of that type 
+	private void updateData(TrickType type, String[][] data) {
+		switch(type) {
+		case CARD:
+			card_data = data;
+			break;
+		case COIN:
+			coin_data = data;
+			break;
+		case SILK:
+			silk_data = data;
+			break;
+		case ROPE:
+			rope_data = data;
+			break;
+		default:
+			break;
+		}
+	}
 	
 	//Given html of a specific item parse out its name and purchase URL
 	//and return a 1 by 2 array of this information 
@@ -137,9 +166,57 @@ public class Get_data {
 		}
 		
 		System.out.println("Finished");
-				
+		
+		updateData(type,res);
+		
 	    return res;
 
 	}
-}
+	
+	
+	/* Given a filename store the text contents of the most
+	 * recent calls of getTricks into that file in a readable format. */
+	public void storeData(String filename) {
+		try {
+			PrintWriter print = new PrintWriter(new FileWriter(filename, false));
+			
+			print.printf("***Randomly Generated Magic Show!***\n");
+			
+			
+			if(rope_data != null) {
+				print.printf("Rope Tricks:\n");
+				print.printf(formatted(rope_data));
+			}
+			
+			if(silk_data != null) {
+				print.printf("Silk Tricks:\n");
+				print.printf(formatted(silk_data));
+			}
+			
+			if(coin_data != null) {
+				print.printf("Coin Tricks:\n");
+				print.printf(formatted(coin_data));
+			}
+			
+			if(card_data != null) {
+				print.printf("Card Tricks:\n");
+				print.printf(formatted(card_data));
+			}
+			
+			print.close();
+		} catch (IOException e) {
+			
+		}
+		
+	}
+		/* Given an array of data return it as a well formatted single string */
+		private String formatted(String[][] data) {
+			String ret = "";
+			for(int i = 0; i < data.length; i++) {
+				ret += "-" + data[i][0] + ", URL: " + data[i][1] + "\n";
+			}
+			return ret;
+		}
+
+	}//End class
 

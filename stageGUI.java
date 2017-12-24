@@ -75,6 +75,15 @@ public class stageGUI extends Application {
 
             @Override
             public void handle(ActionEvent event) {
+            	
+            	Get_data gd = new Get_data();
+            	
+            	//Replace this with data retreival from text fields
+            	//and add 4 calls to "gd.getTricks(type,n)" 
+            	int coin_no = 0;
+            	int silk_no = 0;
+            	int rope_no = 0;
+            	int card_no = 0;
                 System.out.println("You just created a show");
             }
 
@@ -87,15 +96,15 @@ public class stageGUI extends Application {
     public static void main(String[] args) {
         Get_data gd = new Get_data();
     	launch(args);
-    	String[][] res = gd.getTricks(TrickType.CARD,2);
-                
-    	int n = res.length;
-    	
+    	String[][] res = gd.getTricks(TrickType.ROPE,2);
+        res = gd.getTricks(TrickType.CARD, 2);
+    	gd.storeData("show.txt");
+    	/*int n = res.length;
     	for(int i = 0; i < n; i++) {
     		System.out.printf("Trick number %d\n",i);
     		System.out.printf("Trick name is: %s\n",res[i][0]);
     		System.out.printf("Trick url is: %s\n", res[i][1]);    		
-    	}
+    	} */
     	
     	
     	
