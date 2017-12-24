@@ -87,7 +87,7 @@ public class stageGUI extends Application {
     public static void main(String[] args) {
         Get_data gd = new Get_data();
     	launch(args);
-    	gd.getTricks(TrickType.COIN,1);
+    	gd.getTricks(TrickType.COIN,2);
                 
     }
 

@@ -5,6 +5,9 @@
  */
 
 import java.net.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Random;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.*;
@@ -32,7 +35,27 @@ public class Get_data {
 		return (type == TrickType.STAGE) ? stage_url : (type == TrickType.COIN) ? coin_url : (type == TrickType.SILK) ? silk_url : card_url;
 	}
 
-
+	
+	//Given html of a specific item parse out its name and purchase URL
+	//and return a 1 by 2 array of this information 
+	private String[] getInfo(String html) {
+		String[] lst = new String[2];
+	
+		String nameHtml = Jsoup.parse(html).select("a[href]").toString();
+		int start = nameHtml.indexOf('>') + 1;
+		int end = nameHtml.indexOf('<',start);
+		
+		String name = nameHtml.substring(start,end);
+		
+		System.out.printf("Entered html parse with html:\n%s\n",html);
+	
+		System.out.printf("Parsed trick name: %s\n", name);
+		
+		return lst;
+	}
+	
+	
+	
 	/* Returns list of tricks urls, names of length [n] and trick type [type] 
 	 * For each trick store the name of the trick and the purchase link of the trick
 	*/
@@ -62,13 +85,37 @@ public class Get_data {
 		Document doc = Jsoup.parse(pageHTML);
 			
 		Elements items = doc.select("div[class*=name]");
-		/* 
-		while(items.first() != null) {
-			System.out.print(items.first().toString());
-			items = items.next();
-		} */
 		
-		System.out.println(items.toString());
+		ArrayList<String> lst = new ArrayList<String>();
+		HashSet<Integer> used = new HashSet<Integer>();
+				
+		for(Element e : items) {
+			lst.add(e.toString());
+		}
+		
+		
+		Random rnd = new Random();
+		int x;
+		int i = 0;
+		
+		//If too many tricks were requested
+		if(lst.size() < n) {
+			System.out.println("Too many tricks requested");
+			return res;
+		}
+		
+		
+		
+		
+		//Generate n random tricks then parse them 
+		while(used.size() < n) {
+			x = rnd.nextInt(lst.size());
+			if(!used.contains(x)) {
+				res[i] = getInfo(lst.get(x));
+				used.add(x);
+				i++;
+			}
+		}
 		
 		System.out.print("Finished");
 				
@@ -76,3 +123,4 @@ public class Get_data {
 
 	}
 }
+
