@@ -98,7 +98,7 @@ public class Get_data {
 	
 	
 	/* Returns a random array of trick names and urls of size [n] by 2 for trick type [type]. */
-	public String[][] getTricks(TrickType type, int n){
+	public void getTricks(TrickType type, int n){
 		
 		String[][] res = new String[n][2];
 		
@@ -146,7 +146,7 @@ public class Get_data {
 		//If too many tricks were requested
 		if(lst.size() < n) {
 			System.out.println("Too many tricks requested");
-			return res;
+			return;
 		}
 		
 		//Generate n random tricks then parse them 
@@ -163,7 +163,7 @@ public class Get_data {
 		
 		updateData(type,res);
 		
-	    return res;
+	    return;
 
 	}
 	
