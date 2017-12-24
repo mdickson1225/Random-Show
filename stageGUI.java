@@ -87,8 +87,19 @@ public class stageGUI extends Application {
     public static void main(String[] args) {
         Get_data gd = new Get_data();
     	launch(args);
-    	gd.getTricks(TrickType.COIN,2);
+    	String[][] res = gd.getTricks(TrickType.CARD,2);
                 
+    	int n = res.length;
+    	
+    	for(int i = 0; i < n; i++) {
+    		System.out.printf("Trick number %d\n",i);
+    		System.out.printf("Trick name is: %s\n",res[i][0]);
+    		System.out.printf("Trick url is: %s\n", res[i][1]);    		
+    	}
+    	
+    	
+    	
+    	
     }
 
 }

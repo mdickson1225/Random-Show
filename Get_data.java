@@ -19,22 +19,22 @@ public class Get_data {
     
     //Urls to webpages of lists of each type of trick
     String base_url;
-	String stage_url;
+	String rope_url;
     String coin_url;
     String silk_url;
     String card_url;
 
     /* Blank constructor */
 	public Get_data(){
-		base_url = "https://www.magictricks.com/";
-		stage_url = "https://www.magictricks.com/stage-magic.html";
-		coin_url = "https://www.magictricks.com/coin-magic-tricks.html";
-		silk_url = "";
-		card_url = "https://www.magictricks.com/card-magic.html";
+		base_url = "https://fabmagic.com";
+		card_url = "https://fabmagic.com/t/card-tricks";
+		coin_url = "https://fabmagic.com/t/coin--money-magic";
+		rope_url = "https://fabmagic.com/t/rope-magic";
+		silk_url = "https://fabmagic.com/t/silk-magic";	
 	}
 	
 	private String getUrl(TrickType type){
-		return (type == TrickType.STAGE) ? stage_url : (type == TrickType.COIN) ? coin_url : (type == TrickType.SILK) ? silk_url : card_url;
+		return (type == TrickType.CARD) ? card_url : (type == TrickType.COIN) ? coin_url : (type == TrickType.SILK) ? silk_url : rope_url;
 	}
 
 	
@@ -42,21 +42,30 @@ public class Get_data {
 	//and return a 1 by 2 array of this information 
 	private String[] getInfo(String html) {
 		String[] lst = new String[2];
-	
-		String subHtml = Jsoup.parse(html).select("a[href]").toString();
-		int nameStart = subHtml.indexOf('>') + 1;
-		int nameEnd = subHtml.indexOf('<', nameStart);
-		int urlStart = subHtml.indexOf('=') + 2;
+		//String subHtml = Jsoup.parse(html).select("a[href]").toString();
+		
+
+		
+		
+		//Offset to strip newlines and spaces 
+		int nameStart = html.indexOf('>') + 3;
+		int nameEnd = html.indexOf('<', nameStart) - 1;
+		
+		int fstEq = html.indexOf('=');
+		int sndEq = html.indexOf('=',fstEq+1);
+		
+		
+		int urlStart = sndEq + 2;
 		int urlEnd = nameStart - 2;
 		
 		
-		lst[0] = subHtml.substring(nameStart, nameEnd);
-		lst[1] = base_url + subHtml.substring(urlStart, urlEnd);
+		lst[0] = html.substring(nameStart, nameEnd);//.replace("\n", "");
+		lst[1] = base_url + html.substring(urlStart, urlEnd);//.replace("\n","");
 		
 		//System.out.printf("Entered html parse with html:\n%s\n",html);
 	
-		System.out.printf("Parsed trick name: %s\n", lst[0]);
-		System.out.printf("Parsed trick url: %s\n", lst[1]);
+		//System.out.printf("Parsed trick name: %s\n", lst[0]);
+		//System.out.printf("Parsed trick url: %s\n", lst[1]);
 		
 		return lst;
 	}
@@ -76,7 +85,13 @@ public class Get_data {
 			BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream() ) );
 			String str;
 			while((str = in.readLine()) != null) {
-				str = in.readLine().toString();
+				System.out.println((str = in.readLine()) != null);
+				str = in.readLine();
+				//if(str == null) {
+			
+					//System.out.println("Reached a null in the html parsing");
+					//break;
+				//} WTF is going on here and why does only this work with fabmagic?
 				//System.out.println(str);
 				pageHTML += str; //Build up the html
 			}
@@ -90,9 +105,9 @@ public class Get_data {
 		///JSoup parsing
 			
 		Document doc = Jsoup.parse(pageHTML);
-			
-		Elements items = doc.select("div[class*=name]");
-		
+		//System.out.print(pageHTML);
+		Elements items = doc.select("div[class=product-title]");
+		//System.out.println(items.toString());
 		ArrayList<String> lst = new ArrayList<String>();
 		HashSet<Integer> used = new HashSet<Integer>();
 				
@@ -111,9 +126,6 @@ public class Get_data {
 			return res;
 		}
 		
-		
-		
-		
 		//Generate n random tricks then parse them 
 		while(used.size() < n) {
 			x = rnd.nextInt(lst.size());
@@ -124,7 +136,7 @@ public class Get_data {
 			}
 		}
 		
-		System.out.print("Finished");
+		System.out.println("Finished");
 				
 	    return res;
 
