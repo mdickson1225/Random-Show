@@ -17,22 +17,21 @@ import java.io.*;
 
 public class Get_data {
     
-    //Urls to webpages of lists of each type of trick
+    /*Urls to webpages of lists of each type of trick */
     String base_url;
 	String rope_url;
     String coin_url;
     String silk_url;
     String card_url;
 
-    //Arrays to store data from last call of "gettricks" 
-    //for conventient file storage
+    /* Arrays to store data from last call of "gettricks" 
+     * to be later stored in a text file */
     
     String[][] rope_data;
     String[][] coin_data;
     String[][] silk_data;
     String[][] card_data;
     
-    /* Blank constructor */
 	public Get_data(){
 		base_url = "https://fabmagic.com";
 		card_url = "https://fabmagic.com/t/card-tricks";
@@ -41,13 +40,14 @@ public class Get_data {
 		silk_url = "https://fabmagic.com/t/silk-magic";	
 	}
 	
+	/* Given a TrickType return the associated URL as set in the constructor */
 	private String getUrl(TrickType type){
 		return (type == TrickType.CARD) ? card_url : (type == TrickType.COIN) ? coin_url : (type == TrickType.SILK) ? silk_url : rope_url;
 	}
 
 	
-	//Given data and a type update the class variable storing the
-	//Most recent data of that type 
+	/* Given a data array and a type update the instance variable corresponding
+	 * to the most recent data for that type */
 	private void updateData(TrickType type, String[][] data) {
 		switch(type) {
 		case CARD:
@@ -67,14 +67,10 @@ public class Get_data {
 		}
 	}
 	
-	//Given html of a specific item parse out its name and purchase URL
-	//and return a 1 by 2 array of this information 
+	/* Given html of a specific item parse out its name and purchase URL
+	 * and return a 1 by 2 array of this information */
 	private String[] getInfo(String html) {
 		String[] lst = new String[2];
-		//String subHtml = Jsoup.parse(html).select("a[href]").toString();
-		
-
-		
 		
 		//Offset to strip newlines and spaces 
 		int nameStart = html.indexOf('>') + 3;
@@ -88,8 +84,8 @@ public class Get_data {
 		int urlEnd = nameStart - 2;
 		
 		
-		lst[0] = html.substring(nameStart, nameEnd);//.replace("\n", "");
-		lst[1] = base_url + html.substring(urlStart, urlEnd);//.replace("\n","");
+		lst[0] = html.substring(nameStart, nameEnd);
+		lst[1] = base_url + html.substring(urlStart, urlEnd);
 		
 		//System.out.printf("Entered html parse with html:\n%s\n",html);
 	
@@ -101,9 +97,7 @@ public class Get_data {
 	
 	
 	
-	/* Returns list of tricks urls, names of length [n] and trick type [type] 
-	 * For each trick store the name of the trick and the purchase link of the trick
-	*/
+	/* Returns a random array of trick names and urls of size [n] by 2 for trick type [type]. */
 	public String[][] getTricks(TrickType type, int n){
 		
 		String[][] res = new String[n][2];
@@ -209,14 +203,15 @@ public class Get_data {
 		}
 		
 	}
-		/* Given an array of data return it as a well formatted single string */
-		private String formatted(String[][] data) {
-			String ret = "";
-			for(int i = 0; i < data.length; i++) {
-				ret += "-" + data[i][0] + ", URL: " + data[i][1] + "\n";
-			}
-			return ret;
+	
+	/* Given an array of data return it as a well formatted single string */
+	private String formatted(String[][] data) {
+		String ret = "";
+		for(int i = 0; i < data.length; i++) {
+			ret += "-" + data[i][0] + ", URL: " + data[i][1] + "\n";
 		}
+		return ret;
+	}
 
 	}//End class
 
