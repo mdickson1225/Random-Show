@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
@@ -29,24 +30,20 @@ public class stageGUI extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("Show Creator");
+        
+    	primaryStage.setTitle("Show Creator");
+        primaryStage.getIcons().add(new Image("file:black_top_hat.png"));
         primaryStage.show();
-        //Button btn = new Button();
-        //btn.setText("Create Show");
-        //btn.setOnAction(new EventHandler<ActionEvent>() {
 
-        //@Override
-        //public void handle(ActionEvent event) {
-        //System.out.println("You just created a show");
-        //}
-        //});
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
+       
         Scene scene = new Scene(grid, 400, 275);
         primaryStage.setScene(scene);
+        
         //StackPane root = new StackPane();
         //root.getChildren().add(btn);
         Text scenetitle = new Text("Show Generator");
@@ -119,21 +116,7 @@ public class stageGUI extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //Get_data gd = new Get_data();
     	launch(args);
-    	//gd.getTricks(TrickType.ROPE,2);
-        //gd.getTricks(TrickType.CARD, 2);
-    	//gd.storeData("show.txt");
-    	/*int n = res.length;
-    	for(int i = 0; i < n; i++) {
-    		System.out.printf("Trick number %d\n",i);
-    		System.out.printf("Trick name is: %s\n",res[i][0]);
-    		System.out.printf("Trick url is: %s\n", res[i][1]);    		
-    	} */
-    	
-    	
-    	
-    	
     }
 
 }
