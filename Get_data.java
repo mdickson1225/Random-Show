@@ -15,6 +15,10 @@ import org.jsoup.select.*;
 
 import java.io.*;
 
+/**
+ *
+ * @author Mark
+ */
 public class Get_data {
     
     /*Urls to webpages of lists of each type of trick */
@@ -23,7 +27,6 @@ public class Get_data {
     String coin_url;
     String silk_url;
     String card_url;
-
     /* Arrays to store data from last call of "gettricks" 
      * to be later stored in a text file */
     

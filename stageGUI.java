@@ -84,6 +84,22 @@ public class stageGUI extends Application {
             	int silk_no = 0;
             	int rope_no = 0;
             	int card_no = 0;
+                String cardString = cardField.getText();
+                card_no = Integer.parseInt(cardString);
+                gd.getTricks(TrickType.CARD, card_no);
+                gd.storeData("show.txt");
+                String coinString = coinField.getText();
+                coin_no = Integer.parseInt(coinString);
+                gd.getTricks(TrickType.COIN, coin_no);
+                gd.storeData("show.txt");
+                String ropeString = ropeField.getText();
+                rope_no = Integer.parseInt(ropeString);
+                gd.getTricks(TrickType.ROPE, rope_no);
+                gd.storeData("show.txt");
+                String silkString = silkField.getText();
+                silk_no = Integer.parseInt(silkString);
+                gd.getTricks(TrickType.SILK, silk_no);
+                gd.storeData("show.txt");
                 System.out.println("You just created a show");
             }
 
@@ -96,8 +112,8 @@ public class stageGUI extends Application {
     public static void main(String[] args) {
         Get_data gd = new Get_data();
     	launch(args);
-    	String[][] res = gd.getTricks(TrickType.ROPE,2);
-        res = gd.getTricks(TrickType.CARD, 2);
+    	gd.getTricks(TrickType.ROPE,2);
+        gd.getTricks(TrickType.CARD, 2);
     	gd.storeData("show.txt");
     	/*int n = res.length;
     	for(int i = 0; i < n; i++) {
