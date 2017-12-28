@@ -1,7 +1,7 @@
 /* Scott Dickson
  * Mark Dickson
  * 12/21/2017
- * get_data.java
+ * process_data.java
  */
 
 import java.net.*;
@@ -19,7 +19,7 @@ import java.io.*;
  *
  * @author Mark
  */
-public class Get_data {
+public class Process_data {
     
     /*Urls to webpages of lists of each type of trick */
     String base_url;
@@ -35,7 +35,7 @@ public class Get_data {
     String[][] silk_data;
     String[][] card_data;
     
-	public Get_data(){
+	public Process_data(){
 		base_url = "https://fabmagic.com";
 		card_url = "https://fabmagic.com/t/card-tricks";
 		coin_url = "https://fabmagic.com/t/coin--money-magic";
@@ -202,9 +202,8 @@ public class Get_data {
 			
 			print.close();
 		} catch (IOException e) {
-			
+                    System.out.println("Some kind of IO Exception");
 		}
-		
 	}
 	
 	/* Given an array of data return it as a well formatted single string */

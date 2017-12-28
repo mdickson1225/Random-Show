@@ -73,7 +73,7 @@ public class stageGUI extends Application {
             @Override
             public void handle(ActionEvent event) {
             	
-            	Get_data gd = new Get_data();
+            	Process_data pd = new Process_data();
             	
             	//Replace this with data retreival from text fields
             	//and add 4 calls to "gd.getTricks(type,n)" 
@@ -85,27 +85,27 @@ public class stageGUI extends Application {
                 System.out.println(cardString.isEmpty());
                 if(!cardString.isEmpty()) {
                 	card_no = Integer.parseInt(cardString);
-                	gd.getTricks(TrickType.CARD, card_no);
+                	pd.getTricks(TrickType.CARD, card_no);
                 }
                 
                 String coinString = coinField.getText();
                 if(!coinString.isEmpty()) {
                 	coin_no = Integer.parseInt(coinString);
-                	gd.getTricks(TrickType.COIN, coin_no);
+                	pd.getTricks(TrickType.COIN, coin_no);
             	}
                 
                 String ropeString = ropeField.getText();
                 if(!ropeString.isEmpty()) {
                 	rope_no = Integer.parseInt(ropeString);
-                	gd.getTricks(TrickType.ROPE, rope_no);
+                	pd.getTricks(TrickType.ROPE, rope_no);
                 }
                 
                 String silkString = silkField.getText();
                 if(!silkString.isEmpty()) {
                 	silk_no = Integer.parseInt(silkString);
-                	gd.getTricks(TrickType.SILK, silk_no);
+                	pd.getTricks(TrickType.SILK, silk_no);
                 }
-                gd.storeData("show.txt");
+                pd.storeData("show.txt");
                 System.out.println("You just created a show");
             }
 
