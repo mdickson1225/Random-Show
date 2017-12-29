@@ -5,6 +5,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -116,18 +118,23 @@ public class stageGUI extends Application {
                 }
                 pd.storeData("show.txt");
                 System.out.println("You just created a show");
+                
+                /* Open the file that was just created */
+                try {
+                	
+                	String mw_path = "C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\WINWORD.EXE";
+                	String target_path = "show.txt";
+					new ProcessBuilder(mw_path, target_path).start();
+				} catch (IOException e) {
+					System.out.println("Unable to open file");
+				}
+                
             }
 
         });
     }
 
-    private void add_lables() {
-
-    }
-
-    /**
-     * @param args the command line arguments
-     */
+    /* Main function launches the GUI */
     public static void main(String[] args) {
         launch(args);
     }
