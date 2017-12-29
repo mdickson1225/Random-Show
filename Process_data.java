@@ -202,10 +202,67 @@ public class Process_data {
 			
 			print.close();
 		} catch (IOException e) {
-                    System.out.println("Some kind of IO Exception");
+			System.out.println("IO Exception in print text");
 		}
 	}
 	
+	/* Write the same data to a well formatted Latex document */
+	public void storeLatex(String filename) {
+		try {
+			PrintWriter pr = new PrintWriter(new FileWriter(filename, false));
+			
+			/* Set up the document header */
+			pr.printf(		
+			"\\documentclass{article}\r\n" + 
+			"\\usepackage{hyperref}\r\n" + 
+			"\\hypersetup{colorlinks=true, linkcolor=blue,filecolor=magenta, urlcolor=blue}\r\n" + 
+			"\\usepackage{amsfonts}\r\n" + 
+			"\\begin{document}\r\n" + 
+			"\\begin{center}\r\n" + 
+			"\\huge{\\textbf{Randomly Generated Show}}\r\n" + 
+			"\\end{center}\r\n");
+			
+			/* Print all available data */
+			if(rope_data != null) {
+				pr.printf("\\Large{Rope Tricks}\r\n");
+				pr.printf("\\begin{enumerate}\r\n");
+				pr.printf(latex_formatted(rope_data));
+				pr.printf("\\end{enumerate}\r\n");
+			}
+			
+			if(silk_data != null) {
+				pr.printf("\\Large{Silk Tricks}\r\n");
+				pr.printf("\\begin{enumerate}\r\n");
+				pr.printf(latex_formatted(silk_data));
+				pr.printf("\\end{enumerate}\r\n");
+			}
+			
+			if(coin_data != null) {
+				pr.printf("\\Large{Coin Tricks}\r\n");
+				pr.printf("\\begin{enumerate}\r\n");
+				pr.printf(latex_formatted(coin_data));
+				pr.printf("\\end{enumerate}\r\n");
+			}
+			
+			if(card_data != null) {
+				pr.printf("\\Large{Card Tricks}\r\n");
+				pr.printf("\\begin{enumerate}\r\n");
+				pr.printf(latex_formatted(card_data));
+				pr.printf("\\end{enumerate}\r\n");
+			}
+						
+			/* Print the footer */
+			pr.printf("\\end{document}");
+			pr.close();
+			
+		} catch (IOException e) {
+			System.out.println("IO Exception in print Latex");
+		}
+		
+		
+	}
+	
+
 	/* Given an array of data return it as a well formatted single string */
 	private String formatted(String[][] data) {
 		String ret = "";
@@ -215,5 +272,15 @@ public class Process_data {
 		return ret;
 	}
 
+	/* Given an array of data a string of latex items representing it */
+	private String latex_formatted(String[][] data) {
+		String ret = "";
+		for(int i = 0; i < data.length; i++) {
+		  ret += "\\item \\large{" + data[i][0] + ", \\href{" + data[i][1] + "}{Item Link}}\r\n";
+		}
+		return ret;
+	}
+	
+	
 	}//End class
 

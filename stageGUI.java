@@ -116,7 +116,8 @@ public class stageGUI extends Application {
                     silk_no = Integer.parseInt(silkString);
                     pd.getTricks(TrickType.SILK, silk_no);
                 }
-                pd.storeData("show.txt");
+                //pd.storeData("show.txt");
+                pd.storeLatex("show.tex");
                 System.out.println("You just created a show");
                 
                 /* Open the file that was just created */
