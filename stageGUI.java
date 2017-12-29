@@ -43,7 +43,9 @@ public class stageGUI extends Application {
        
         Scene scene = new Scene(grid, 400, 275);
         primaryStage.setScene(scene);
-        
+        scene.getStylesheets().add
+        (stageGUI.class.getResource("inputCSS.css").toExternalForm());
+        primaryStage.show();
         //StackPane root = new StackPane();
         //root.getChildren().add(btn);
         Text scenetitle = new Text("Show Generator");
